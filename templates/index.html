@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Главная - Мои Сайты{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Электронные ресурсы</h1>
+</div>
+
+<div id="groupsContainer" class="groups-container">
+    {% for group in groups %}
+    <div class="group-block" data-group-id="{{ group.id }}" data-order="{{ group.display_order }}">
+        <div class="group-header">
+            <div class="group-handle" style="display: none;">
+                <span class="handle-icon">≡</span>
+            </div>
+            <div class="group-title">
+                <h2>{{ group.name }}</h2>
+                {% if group.description %}
+                <p class="group-description">{{ group.description }}</p>
+                {% endif %}
+            </div>
+            <div class="group-stats">
+                <span class="site-count">{{ group.sites|length }} сайт(ов)</span>
+            </div>
+        </div>
+
+        {% if group.sites %}
+        <div class="sites-grid">
+            {% for site in group.sites %}
+            <div class="site-card">
+                <div class="site-icon">
+                    {% if site.icon_url %}
+                    <img src="{{ site.icon_url }}" alt="{{ site.name }}"
+                         class="site-icon-img"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    {% endif %}
+                    <div class="default-icon" {% if site.icon_url %}style="display:none;"{% endif %}>
+                        <span class="icon-placeholder">🌐</span>
+                    </div>
+                </div>
+                <div class="site-content">
+                    <h3 class="site-name">{{ site.name }}</h3>
+                    {% if site.description %}
+                    <p class="site-description">{{ site.description }}</p>
+                    {% endif %}
+                    <div class="site-actions">
+                        <a href="{{ site.url }}" target="_blank" class="btn-visit">
+                            <span class="btn-icon">↗</span>
+                            Перейти
+                        </a>
+                        {% if site.icon_url or site.description %}
+                        <button type="button" class="btn-info"
+                                data-toggle="modal" data-target="#siteInfoModal{{ site.id }}">
+                            ℹ️ Подробнее
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-group">
+            <div class="empty-icon">📭</div>
+            <p>В этой группе пока нет сайтов</p>
+            <a href="{{ url_for('admin_sites') }}" class="btn-add-sites">
+                <span class="btn-icon">+</span> Добавить сайты
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    {% else %}
+    <div class="no-groups">
+        <div class="no-groups-icon">📂</div>
+        <h3>Группы не найдены</h3>
+        <p>Начните с создания групп и добавления сайтов в админ-панели.</p>
+        <a href="{{ url_for('admin_groups') }}" class="btn-admin">
+            <span class="btn-icon">⚙️</span> Перейти в админку
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Модальные окна для сайтов остаются без изменений -->
+{% for group in groups %}
+    {% for site in group.sites %}
+    <div class="modal fade" id="siteInfoModal{{ site.id }}" tabindex="-1">
+        <!-- Содержимое модального окна без изменений -->
+    </div>
+    {% endfor %}
+{% endfor %}
+{% endblock %}
