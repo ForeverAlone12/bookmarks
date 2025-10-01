@@ -26,6 +26,9 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
+        <div>
+            {{ client_ip }} / {{ client_hostname }}
+        </div>
 
         {% block content %}{% endblock %}
     </div>

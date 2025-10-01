@@ -1,3 +1,5 @@
+import socket
+
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from flask_bootstrap import Bootstrap5
 from models import db, Group, Site
@@ -17,8 +19,17 @@ with app.app_context():
 # Главная страница - отображение сайтов по группам
 @app.route('/')
 def index():
+    client_ip = request.remote_addr
+
+    # Получаем имя хоста клиента (если доступно)
+    try:
+        client_hostname = socket.gethostbyaddr(client_ip)[0]
+    except:
+        client_hostname = "Не удалось определить"
+
     groups = Group.query.order_by(Group.display_order.asc()).all()
-    return render_template('index.html', groups=groups)
+    return render_template('index.html',
+                           groups=groups, client_ip=client_ip, client_hostname=client_hostname)
 
 
 # Эндпоинт для обновления порядка групп
@@ -148,4 +159,8 @@ def delete_site(id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(
+        host='0.0.0.0',
+        port=5000,
+        debug=False,
+        threaded=True)
