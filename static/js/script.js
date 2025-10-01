@@ -58,16 +58,6 @@ $(document).ready(function() {
     // Инициализация анимаций
     setTimeout(animateCards, 500);
 
-    // Динамическое обновление счетчиков
-    function updateCounters() {
-        $('.group-block').each(function() {
-            var siteCount = $(this).find('.site-card').length;
-            $(this).find('.site-count').text(siteCount + ' сайт(ов)');
-        });
-    }
-
-    updateCounters();
-
     // Эффект параллакса для заголовков групп
     $(window).scroll(function() {
         var scrolled = $(window).scrollTop();

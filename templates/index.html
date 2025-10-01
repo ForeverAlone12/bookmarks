@@ -11,17 +11,11 @@
     {% for group in groups %}
     <div class="group-block" data-group-id="{{ group.id }}" data-order="{{ group.display_order }}">
         <div class="group-header">
-            <div class="group-handle" style="display: none;">
-                <span class="handle-icon">≡</span>
-            </div>
             <div class="group-title">
                 <h2>{{ group.name }}</h2>
                 {% if group.description %}
                 <p class="group-description">{{ group.description }}</p>
                 {% endif %}
-            </div>
-            <div class="group-stats">
-                <span class="site-count">{{ group.sites|length }} сайт(ов)</span>
             </div>
         </div>
 
@@ -49,12 +43,6 @@
                             <span class="btn-icon">↗</span>
                             Перейти
                         </a>
-                        {% if site.icon_url or site.description %}
-                        <button type="button" class="btn-info"
-                                data-toggle="modal" data-target="#siteInfoModal{{ site.id }}">
-                            ℹ️ Подробнее
-                        </button>
-                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -81,13 +69,4 @@
     </div>
     {% endfor %}
 </div>
-
-<!-- Модальные окна для сайтов остаются без изменений -->
-{% for group in groups %}
-    {% for site in group.sites %}
-    <div class="modal fade" id="siteInfoModal{{ site.id }}" tabindex="-1">
-        <!-- Содержимое модального окна без изменений -->
-    </div>
-    {% endfor %}
-{% endfor %}
 {% endblock %}

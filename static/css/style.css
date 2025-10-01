@@ -10,17 +10,10 @@
 
 .group-header {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
-    padding: 0.3rem;
+    padding-left: 1rem;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-}
-
-.group-title h2 {
-    margin: 0 0 8px 0;
-    font-size: 1.5em;
-    font-weight: 600;
 }
 
 .group-icon {
@@ -166,12 +159,6 @@
 }
 
 /* Стили для пустых состояний */
-.empty-group {
-    text-align: center;
-    padding: 60px 24px;
-    color: #6c757d;
-}
-
 .empty-icon {
     font-size: 3em;
     margin-bottom: 16px;
@@ -196,40 +183,6 @@
     color: white;
     text-decoration: none;
     transform: translateY(-1px);
-}
-
-.no-groups {
-    text-align: center;
-    padding: 80px 24px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-}
-
-.no-groups-icon {
-    font-size: 4em;
-    margin-bottom: 24px;
-    opacity: 0.7;
-}
-
-.btn-admin {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: #667eea;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.btn-admin:hover {
-    background: #5a6fd8;
-    color: white;
-    text-decoration: none;
-    transform: translateY(-2px);
 }
 
 /* Стили для модальных окон */
@@ -293,61 +246,6 @@
     font-weight: 500;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-    .sites-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 16px;
-        padding: 16px;
-    }
-
-    .group-header {
-        flex-direction: column;
-        gap: 12px;
-        padding: 20px;
-    }
-
-    .group-stats {
-        align-self: flex-start;
-    }
-
-    .site-card {
-        padding: 16px;
-    }
-
-    .modal-site-info {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        text-align: center;
-    }
-
-    .modal-icon {
-        order: -1;
-    }
-}
-
-@media (max-width: 480px) {
-    .sites-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .site-actions {
-        flex-direction: column;
-    }
-}
-
-/* Анимации */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .group-block {
     animation: fadeInUp 0.5s ease-out;
 }
@@ -373,10 +271,6 @@
     transform: translateY(-2px);
 }
 
-/* Улучшенная типографика */
-.group-title h2 {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
 
 .site-name {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -441,35 +335,12 @@
     background: #f8f9ff;
 }
 
-.group-handle {
-    margin-right: 12px;
-    cursor: grab;
-    padding: 8px;
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.2);
-    transition: background 0.2s ease;
-}
-
-.group-handle:hover {
-    background: rgba(255, 255, 255, 0.3);
-}
-
-.group-handle:active {
-    cursor: grabbing;
-}
-
 .handle-icon {
     font-size: 1.2em;
     color: rgba(255, 255, 255, 0.8);
     display: block;
 }
 
-/* Анимации для перетаскивания */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-    100% { transform: scale(1); }
-}
 
 .group-block.reordering {
     animation: pulse 2s infinite;
@@ -541,27 +412,6 @@
     font-size: 0.8em;
     font-weight: bold;
     z-index: 10;
-}
-
-/* Адаптивность для режима перетаскивания */
-@media (max-width: 768px) {
-    .group-handle {
-        padding: 6px;
-        margin-right: 8px;
-    }
-
-    .handle-icon {
-        font-size: 1em;
-    }
-
-    .reorder-actions {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .btn-reorder {
-        justify-content: center;
-    }
 }
 
 /* Улучшенная обратная связь при перетаскивании */
